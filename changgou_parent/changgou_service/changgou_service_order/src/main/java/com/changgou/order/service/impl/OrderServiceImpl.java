@@ -171,7 +171,7 @@ public class OrderServiceImpl implements OrderService {
              *     在开发测试的时候, 如果专门想测试这套业务流程, 可以将超时时间设置为20秒
              */
             //第一个参数: 路由键或者是队列名称, 第二个参数: 发送的内容, 第三个参数:设置超时时间属性
-            rabbitTemplate.convertAndSend(RabbitMQConfig.RELAY_QUEUE, (Object) order.getId(), new MessagePostProcessor() {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.DELAY_QUEUE, (Object) order.getId(), new MessagePostProcessor() {
                 @Override
                 public Message postProcessMessage(Message message) throws AmqpException {
                     //获取消息属性, 设置消息超时时间为20秒, 等上线阶段设置为20分钟

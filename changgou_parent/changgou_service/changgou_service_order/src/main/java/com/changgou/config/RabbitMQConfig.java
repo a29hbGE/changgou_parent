@@ -10,7 +10,7 @@ public class RabbitMQConfig {
 
 
     //延迟消息队列名称
-    public static final String RELAY_QUEUE = "relay_queue";
+    public static final String DELAY_QUEUE = "delay_queue";
     //交换机名称
     public static final String CANCEL_ORDER_PAY_EXCHANGE = "cancel_order_pay_exchange";
 
@@ -24,7 +24,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public Queue relayQueue(){
-        return QueueBuilder.durable(RELAY_QUEUE)
+        return QueueBuilder.durable(DELAY_QUEUE)
                 .withArgument("x-dead-letter-exchange",CANCEL_ORDER_PAY_EXCHANGE)
                 .withArgument("x-dead-letter-routing-key","")
                 .build();
